@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """defines a function index_range"""
 
 from typing import Tuple

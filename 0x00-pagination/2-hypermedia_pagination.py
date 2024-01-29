@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 define server Class
 """
@@ -24,7 +24,6 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
     return (start_page, end_page)
 
 
-
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -45,23 +44,22 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            """Returns list of rows"""
-            assert type(page) == int and page > 0
-            assert type(page_size) == int and page_size > 0
+        """Returns list of rows"""
+        assert type(page) == int and page > 0
+        assert type(page_size) == int and page_size > 0
 
-            start_idx, end_idx = index_range(page, page_size )
-            idx_range = self.dataset()
+        start_idx, end_idx = index_range(page, page_size)
+        idx_range = self.dataset()
 
-            if start_idx > len(idx_range):
-                return []
-            
-            return idx_range[start_idx:end_idx]
-    
+        if start_idx > len(idx_range):
+            return []
 
-    def get_hyper(self, page:int = 1, page_size: int = 10) -> Dict:
+        return idx_range[start_idx:end_idx]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """Return a dictionary"""
 
-        start_idx , end_idx = index_range(page, page_size)
+        start_idx, end_idx = index_range(page, page_size)
         data = self.get_page(page, page_size)
         page_size = len(data)
 
@@ -83,17 +81,12 @@ class Server:
             'data': data,
             'next_page': next_page,
             'prev_page': prev_page,
-            'total_pages': page_count 
+            'total_pages': page_count
         }
-
-        
-
-    
-
 
 
 if __name__ == "__main__":
-    
+
     server = Server()
 
     print(server.get_hyper(1, 2))
