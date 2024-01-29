@@ -4,14 +4,13 @@ define server Class
 """
 
 import csv
-import math
 from typing import List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     function that returns start and end index of a page
-    Args: 
+    Args:
         page: int
         page_size: int
 
@@ -45,8 +44,8 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Returns list of rows"""
-        assert type(page) == int and page > 0
-        assert type(page_size) == int and page_size > 0
+        assert type(page) == int and type(page_size) == int
+        assert page > 0  and page_size > 0
 
         start_idx, end_idx = index_range(page, page_size)
         idx_range = self.dataset()
@@ -55,27 +54,3 @@ class Server:
             return []
 
         return idx_range[start_idx:end_idx]
-
-
-if __name__ == "__main__":
-
-    server = Server()
-
-    try:
-        should_err = server.get_page(-10, 2)
-    except AssertionError:
-        print("AssertionError raised with negative values")
-
-    try:
-        should_err = server.get_page(0, 0)
-    except AssertionError:
-        print("AssertionError raised with 0")
-
-    try:
-        should_err = server.get_page(2, 'Bob')
-    except AssertionError:
-        print("AssertionError raised when page and/or page_size are not ints")
-
-    print(server.get_page(1, 3))
-    print(server.get_page(3, 2))
-    print(server.get_page(3000, 100))

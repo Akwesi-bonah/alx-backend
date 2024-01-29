@@ -9,10 +9,19 @@ from typing import Dict, List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """ Returns a tuple of a start and an end index"""
-    start_idx = (page * page_size) - page_size
-    end_idx = start_idx + page_size
-    return (start_idx, end_idx)
+    """
+    function that returns start and end index of a page
+    Args:
+        page: int
+        page_size: int
+
+    return (tuple)
+    """
+
+    start_page = (page * page_size) - page_size
+    end_page = start_page + page_size
+
+    return (start_page, end_page)
 
 
 class Server:

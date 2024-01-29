@@ -11,7 +11,7 @@ from typing import List, Tuple, Dict
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     function that returns start and end index of a page
-    Args: 
+    Args:
         page: int
         page_size: int
 
@@ -45,8 +45,8 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Returns list of rows"""
-        assert type(page) == int and page > 0
-        assert type(page_size) == int and page_size > 0
+        assert type(page) == int  and  type(page_size) == int
+        assert page > 0 and page_size > 0
 
         start_idx, end_idx = index_range(page, page_size)
         idx_range = self.dataset()
@@ -83,16 +83,3 @@ class Server:
             'prev_page': prev_page,
             'total_pages': page_count
         }
-
-
-if __name__ == "__main__":
-
-    server = Server()
-
-    print(server.get_hyper(1, 2))
-    print("---")
-    print(server.get_hyper(2, 2))
-    print("---")
-    print(server.get_hyper(100, 3))
-    print("---")
-    print(server.get_hyper(3000, 100))
