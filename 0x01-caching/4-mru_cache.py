@@ -17,7 +17,7 @@ class MRUCache(Base):
             return
         if key not in self.cache_data:
             if len(self.cache_data) + 1 > self.MAX_ITEMS:
-                last_key, _ = self.cache_data.popitem(False)
+                last_key, _ = self.cache_data.popitem(last=False)
                 print("DISCARD: {}".format(last_key))
             self.cache_data[key] = item
             self.cache_data.move_to_end(key, last=False)

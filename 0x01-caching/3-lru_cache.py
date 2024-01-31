@@ -5,7 +5,7 @@ Base = __import__("base_caching").BaseCaching
 
 
 class LRUCache(Base):
-    """ Inherits from BaseCaching && Uses LIFO caching algorithm """
+    """ Inherits from BaseCaching && Uses LRU caching algorithm """
     def __init__(self):
         """initialize cache"""
         super().__init__()
@@ -15,14 +15,12 @@ class LRUCache(Base):
         """ Updates the cache_data with key and value """
         if key is None or item is None:
             return
-        if key not in self.cache_data:
-            if len(self.cache_data) + 1 > self.MAX_ITEMS:
-                last_key, _ = self.cache_data.popitem(True)
-                print("DISCARD: {}".format(last_key))
-            self.cache_data[key] = item
+        if key in self.cache_data:
             self.cache_data.move_to_end(key, last=False)
-        else:
-            self.cache_data[key] = item
+        elif len(self.cache_data) + 1 > self.MAX_ITEMS:
+            last_key, _ = self.cache_data.popitem(last=True)
+            print("DISCARD: {}".format(last_key))
+        self.cache_data[key] = item
 
     def get(self, key):
         """Gets the value for the provided key"""
